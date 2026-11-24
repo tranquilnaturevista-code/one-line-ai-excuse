@@ -40,8 +40,8 @@ def problems_with(line: str) -> list[str]:
             "line is %d characters; the gate allows %d-%d"
             % (size, MIN_CHARS, MAX_CHARS)
         )
-    if any(ch in line for ch in ("\n", "\r")):
-        found.append("line must not contain a line break")
+    if any(ord(ch) < 32 or ord(ch) == 127 for ch in line):
+        found.append("line must not contain control characters")
     return found
 
 
